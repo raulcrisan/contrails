@@ -1,0 +1,8 @@
+eu\isdc\contrails\controller\FlightController.class
+eu\isdc\contrails\service\FlightsService.class
+eu\isdc\contrails\controller\GreetingController.class
+eu\isdc\contrails\test\TestRest.class
+eu\isdc\contrails\ContrailsApiApplication.class
+eu\isdc\contrails\flightAwareClient\FlightAwareClient.class
+eu\isdc\contrails\flightAwareClient\model\Quote.class
+eu\isdc\contrails\flightAwareClient\model\Value.class
