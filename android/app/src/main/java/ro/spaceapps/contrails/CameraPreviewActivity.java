@@ -107,12 +107,10 @@ public class CameraPreviewActivity extends AppCompatActivity {
 
     private void initPreview() {
         preview.setVisibility(View.VISIBLE);
-//        preview.setFrameCallback(new ImageProcessor());
-        preview.setFrameCallback(new PointProcessor(sm));
-
-        //preview.setFrameCallback(new FrameProcessor());
-        //preview.setParentActivuty(this);
-    }
+        //preview.setFrameCallback(new ImageProcessor());
+        //preview.setFrameCallback(new PointProcessor(sm));
+        preview.setFrameCallback(new OrientationProcessor(sm));
+}
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {

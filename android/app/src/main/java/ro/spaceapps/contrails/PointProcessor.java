@@ -44,7 +44,8 @@ public class PointProcessor implements GuidedPhotoPreview.FrameCallback, SensorE
 
     @Override
     public void onCameraViewStarted(SurfaceTexture texture, int width, int height) {
-
+        shouldFlip = android.os.Build.DEVICE.equals("bullhead")
+                || android.os.Build.DEVICE.equals("shamu");
     }
 
     double lat = 46.1736;

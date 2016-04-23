@@ -181,6 +181,9 @@ public class GuidedPhotoPreview extends SurfaceView implements SurfaceHolder.Cal
             surfaceTexture = new SurfaceTexture(10);
             mCamera.setPreviewTexture(surfaceTexture);
             mCamera.startPreview();
+            float verticalFOV = params.getVerticalViewAngle();
+            float horizontalFOV = params.getHorizontalViewAngle();
+            Log.d(TAG, "FOV: " + verticalFOV + ", " + horizontalFOV);
 
         } catch (Exception e) {
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
