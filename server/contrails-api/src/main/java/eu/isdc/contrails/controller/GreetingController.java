@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import eu.isdc.contrails.flightAwareClient.model.Quote;
+import eu.isdc.contrails.flightAwareClient.model.BirdsEyeResponseWrapper;
 import eu.isdc.contrails.test.TestRest;
 
 /**
@@ -22,7 +22,7 @@ public class GreetingController {
     @RequestMapping("/greeting")
     public TestRest greeting(@RequestParam(value="name", defaultValue="World") String name) {
         RestTemplate restTemplate = new RestTemplate();
-        Quote quote = restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random", Quote.class);
+        BirdsEyeResponseWrapper quote = restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random", BirdsEyeResponseWrapper.class);
         return new TestRest(counter.incrementAndGet(), quote.toString());
     }
 }

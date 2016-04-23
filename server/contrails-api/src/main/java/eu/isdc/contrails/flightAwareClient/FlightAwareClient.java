@@ -9,6 +9,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -42,7 +43,8 @@ public class FlightAwareClient<T> extends RestTemplate {
 	    	
 	    HttpHeaders headers = new HttpHeaders();
 	    headers.add("Authorization", "Basic " + base64Creds);
-	
+	    headers.setContentType(MediaType.APPLICATION_JSON);
+
 	    request = new HttpEntity<String>(headers);
 	    return request;
 	}

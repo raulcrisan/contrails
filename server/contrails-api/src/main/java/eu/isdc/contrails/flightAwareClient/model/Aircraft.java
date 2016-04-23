@@ -495,6 +495,6 @@ this.additionalProperties.put(name, value);
 }
 
 public String toString() {
-	return "test: " + faFlightID;
+	return "Aircraft ID: " + faFlightID + "<br/>";
 }
 }
