@@ -1,2 +1,4 @@
 .idea
 *.iml
+android/.idea/gradle.xml
+android/.idea/misc.xml

@@ -6,6 +6,12 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import com.google.android.stardroid.control.AstronomerModel;
+import com.google.android.stardroid.control.AstronomerModelImpl;
+import com.google.android.stardroid.control.RealMagneticDeclinationCalculator;
+import com.google.android.stardroid.units.LatLong;
+import com.google.android.stardroid.units.Vector3;
+
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -18,7 +24,7 @@ import org.opencv.imgproc.Imgproc;
 public class PointProcessor implements GuidedPhotoPreview.FrameCallback, SensorEventListener {
     boolean shouldFlip = false;
     SensorManager sm;
-//    AstronomerModel astro;
+    AstronomerModel astro;
 
     public PointProcessor(SensorManager sm){
 
@@ -31,8 +37,8 @@ public class PointProcessor implements GuidedPhotoPreview.FrameCallback, SensorE
                 SensorManager.SENSOR_DELAY_NORMAL);
 
 
-//        astro = new AstronomerModelImpl(new RealMagneticDeclinationCalculator());
-//        astro.setLocation(new LatLong(userLat, userLon));
+        astro = new AstronomerModelImpl(new RealMagneticDeclinationCalculator());
+        astro.setLocation(new LatLong(userLat, userLon));
 
     }
 
@@ -61,11 +67,9 @@ public class PointProcessor implements GuidedPhotoPreview.FrameCallback, SensorE
 
         Imgproc.circle(original, new Point(original.width()/2, original.height()/2), (int) (original.width()*CIRCLE_RATIO),  new Scalar( 255, 0, 0, 255 ),-1 );
 
-//        astro.getPointing().getLineOfSight();
-
-        Imgproc.putText(original, "azimuth " +azimuth,new Point(original.width()/2, original.height()/2 + 40),0,1,new Scalar(255,255,255, 255) );
-        Imgproc.putText(original, "pitch " +pitch,new Point(original.width()/2, original.height()/2 + 80),0,1,new Scalar(255,255,255, 255) );
-        Imgproc.putText(original, "roll " +roll,new Point(original.width()/2, original.height()/2 + 120),0,1,new Scalar(255,255,255,255) );
+        Imgproc.putText(original, "astro = " + astro.getPointing().getLineOfSight(),new Point(original.width()/2-200, original.height()/2 + 40),0,1,new Scalar(255,255,255, 255) );
+//        Imgproc.putText(original, "pitch " +pitch,new Point(original.width()/2, original.height()/2 + 80),0,1,new Scalar(255,255,255, 255) );
+//        Imgproc.putText(original, "roll " +roll,new Point(original.width()/2, original.height()/2 + 120),0,1,new Scalar(255,255,255,255) );
 
 
         return original;
@@ -100,7 +104,7 @@ public class PointProcessor implements GuidedPhotoPreview.FrameCallback, SensorE
         // If gravity and geomag have values then find rotation matrix
         if (gravity != null && geomag != null) {
 
-//            astro.setPhoneSensorValues(new Vector3(gravity), new Vector3(geomag));
+            astro.setPhoneSensorValues(new Vector3(gravity), new Vector3(geomag));
 
             // checks that the rotation matrix is found
             boolean success = SensorManager.getRotationMatrix(inR, I,
