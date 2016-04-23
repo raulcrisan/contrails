@@ -1,8 +1,10 @@
 package ro.spaceapps.contrails;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.hardware.SensorManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +23,8 @@ public class CameraPreviewActivity extends AppCompatActivity {
 
     //private CameraSurface preview;
     private GuidedPhotoPreview preview;
+
+    SensorManager sm;
 
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
@@ -46,6 +50,8 @@ public class CameraPreviewActivity extends AppCompatActivity {
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
+
+        sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         super.onCreate(savedInstanceState);
 
@@ -101,7 +107,8 @@ public class CameraPreviewActivity extends AppCompatActivity {
 
     private void initPreview() {
         preview.setVisibility(View.VISIBLE);
-        preview.setFrameCallback(new ImageProcessor());
+//        preview.setFrameCallback(new ImageProcessor());
+        preview.setFrameCallback(new PointProcessor(sm));
 
         //preview.setFrameCallback(new FrameProcessor());
         //preview.setParentActivuty(this);
